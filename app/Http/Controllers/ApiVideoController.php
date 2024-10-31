@@ -25,15 +25,15 @@ class ApiVideoController extends Controller
         $query = Video::query();
 
         if($company->a_course_flag === 1) {
-            $query->where('cource', 1);
+            $query->orWhere('course', 1);
         }
 
         if($company->b_course_flag === 1) {
-            $query->where('cource', 2);
+            $query->orWhere('course', 2);
         }
 
         if($company->c_course_flag === 1) {
-            $query->where('cource', 3);
+            $query->orWhere('course', 3);
         }
         $query->where('is_display', 1);
         $results = $query->get();
@@ -41,7 +41,7 @@ class ApiVideoController extends Controller
         return response()->json([
             'status' => true,
             'results' => $results
-        ]);
+        ], 200);
     }
 
     /**
